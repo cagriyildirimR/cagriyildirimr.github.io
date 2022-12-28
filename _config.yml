@@ -1,9 +1,5 @@
 title: Notes on stuff
 description: My articles
-theme: just-the-docs
 
 baseurl: "/notes"
 url: https://cagriyildirimr.github.io
-
-aux_links:
-  Template Repository: https://github.com/cagriyildirimR/cagriyildirimr.github.io
