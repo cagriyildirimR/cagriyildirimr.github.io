@@ -3,3 +3,43 @@ description: My articles
 
 baseurl: "/notes"
 url: https://cagriyildirimr.github.io
+
+
+VERSION: 0.6.0
+
+ASSET_PATH: false
+
+# Build settings
+markdown_ext: "md"
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: /:categories/:year/:month/:day/:title
+highlighter: rouge
+gems:
+  - jekyll-feed
+  - just-the-docs
+
+theme: 'just-the-docs'
+
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
+heading_anchors: true
+
+# Exclude from processing.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
