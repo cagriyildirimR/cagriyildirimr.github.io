@@ -45,21 +45,21 @@ Here is an example of a GitHub workflow that sends a "hello" message to the pers
 ```yaml
 name: Hello Message
 
-on:
-  issues:
-    types: [opened]
+on:[pull_request_target, issues]
 
 jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
       - name: Send hello message
-        uses: actions/hello-world-javascript-action@v1
+        uses: actions/first-interraction@v1
         with:
-          who-to-greet: ${{ github.event.issue.user.login }}
+          repo-token: \${{secrets.GITHUB_TOKEN}}
+          issue-message: "Message that will be displayed on users' first issue"
+          pr-message: "Message that will be displayed on users; first pull request"
 ```
 
-This workflow is triggered whenever an issue is opened in the repository. It contains a single job called "hello," which runs on an Ubuntu virtual machine. The job has a single step, which uses the actions/hello-world-javascript-action action from the GitHub Actions Marketplace to send a message to the person who opened the issue.
+This workflow is triggered whenever an issue is opened in the repository or created a pull request. It contains a single job called "hello," which runs on an Ubuntu virtual machine. The job has a single step, which uses the actions/first-interraction action from the GitHub Actions Marketplace to send a message to the person who triggered this event.
 
 Here is an example of a continuous integration (CI) workflow for a Go project that runs tests whenever a pull request is merged:
 
