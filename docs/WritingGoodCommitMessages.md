@@ -28,6 +28,8 @@ Git commit messages are an important aspect of your version control workflow, as
 
 4. Use the body to provide more context: The body of the commit message should provide more context and detail about the changes made in the commit. It should be written in full sentences, and should use the past tense.
 
+5. Keep it concise: Try to keep the commit message concise, while still providing enough information to understand the changes made. A good rule of thumb is to keep the subject line to 50 characters or less, and the body to 72 characters or less per line.
+
 ## Keep the subject line short and consise
 
 Good:
@@ -85,15 +87,24 @@ Good:
 ```
 Fix bug in login form
 
-The login form was not properly validating the email field, allowing users to submit the form with an invalid email address. This commit fixes the bug by adding proper email validation to the form."
+The login form was not properly validating the email field, allowing 
+users to submit the form with an invalid email address. This commit 
+fixes the bug by adding proper email validation to the form."
 
-The login form was also allowing users to submit the form with an empty password field, which could allow malicious users to gain access to accounts. This commit adds a check to ensure that the password field is not empty before allowing the form to be submitted.
+The login form was also allowing users to submit the form with an 
+empty password field, which could allow malicious users to gain 
+access to accounts. This commit adds a check to ensure that the 
+password field is not empty before allowing the form to be submitted.
 ```
 
 ```txt
 Add support for new file format
 
-This commit adds support for the new XYZ file format to the application. The support includes parsing and validating the file contents, as well as displaying the data in the UI. The implementation makes use of the existing file parsing framework, and includes tests to ensure the correct functioning of the feature." 
+This commit adds support for the new XYZ file format to the application. 
+The support includes parsing and validating the file contents, as well 
+as displaying the data in the UI. The implementation makes use of the 
+existing file parsing framework, and includes tests to ensure the 
+correct functioning of the feature." 
 ```
 
 provides more context and detail about the changes made in the commit.
@@ -107,6 +118,16 @@ Added support for new file format
 does not provide enough context or detail about the changes made in the commit.
 
 In the good example, the commit message uses the body to provide more context and detail about the changes made in the commit. It describes the new feature that was added, and explains how it was implemented and tested. This level of detail helps to give a better understanding of the changes made and the reasoning behind them. In the bad example, the commit message does not provide enough context or detail, making it difficult to understand the changes made and the reasoning behind them. It is important to use the body of the commit message to provide as much context and detail as possible, as this will help you and your team understand the changes more clearly.
+
+## Keep it concise
+
+"Keep it concise", is important because it helps to ensure that your commit messages are easy to read and understand. Long, rambling commit messages can be difficult to read and can make it hard to understand the changes made in the commit. By keeping your commit messages concise, you can ensure that they are clear and easy to understand.
+
+The 50 character limit for the subject line is based on the fact that the subject line is displayed on its own line in most Git tools, and it is important to ensure that the entire subject line is visible on the screen without wrapping. This makes it easier to read and understand the commit message at a glance.
+
+The 72 character limit for the body is based on the fact that many code editors and terminal windows display text in a fixed-width font, with a line length of around 80 characters. By keeping the body of the commit message to 72 characters or less per line, the text will be easy to read and will not wrap awkwardly in these environments.
+
+By following these guidelines, you can ensure that your commit messages are easy to read and understand, which will make it easier for you and your team to work with your version control system.
 
 ## Summary
 
