@@ -97,7 +97,7 @@ access to accounts. This commit adds a check to ensure that the
 password field is not empty before allowing the form to be submitted.
 ```
 
-```txt
+```
 Add support for new file format
 
 This commit adds support for the new XYZ file format to the application. 
@@ -107,15 +107,16 @@ existing file parsing framework, and includes tests to ensure the
 correct functioning of the feature." 
 ```
 
-provides more context and detail about the changes made in the commit.
+This provides more context and detail about the changes made in the commit.
 
 Bad:
+
 ```
 Add support for new file format
 
 Added support for new file format
 ```
-does not provide enough context or detail about the changes made in the commit.
+This does not provide enough context or detail about the changes made in the commit.
 
 In the good example, the commit message uses the body to provide more context and detail about the changes made in the commit. It describes the new feature that was added, and explains how it was implemented and tested. This level of detail helps to give a better understanding of the changes made and the reasoning behind them. In the bad example, the commit message does not provide enough context or detail, making it difficult to understand the changes made and the reasoning behind them. It is important to use the body of the commit message to provide as much context and detail as possible, as this will help you and your team understand the changes more clearly.
 
