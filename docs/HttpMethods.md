@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Http Methods with Go
+title: HTTP Methods with Go
 nav_order: 4
 ---
 
-# Http Methods with Go
+# HTTP Methods with Go
 
 {: .no_toc }
 
