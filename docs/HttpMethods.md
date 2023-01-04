@@ -48,7 +48,7 @@ This GET request is asking the server at "www.example.com" to retrieve the "inde
 For three cases, an HTTP server is created and listens for incoming requests on a specified port. A function is defined to handle requests made to a `/index.html`. The function writes a response to the request and accesses information about the request. The server listens for requests and calls the handling function until it is stopped or encounters an error.
 
 #### Handle Get Request using http package
-~~~Go 
+~~~
 handleGet := func(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet{
 		fmt.Fprint(w, "<h1>Hello, world!</h1>")
@@ -61,7 +61,7 @@ http.ListenAndServe(":8080", nil)
 
 #### Handle Get Request using gin
 
-~~~Go 
+~~~
 router := gin.Default()
 handleGet := func(c *gin.Context) {
 	c.Header("Content-Type", "text/html")
@@ -75,7 +75,7 @@ router.Run(":8080")
 
 #### Handle Get Request using mux
 
-~~~Go 
+~~~
 r := mux.NewRouter()
 
 handleGet := func(w http.ResponseWriter, r *http.Request) {
@@ -107,7 +107,7 @@ You can send a POST request using a tool like cURL or a web browser, or programm
 
 #### Handle POST Request using http package
 
-~~~Go 
+~~~
 handlePost := func(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -155,7 +155,7 @@ You can check the values of list with a GET request to the `/read`.
 
 #### Handle POST Request using Gin
 
-~~~Go 
+~~~
 router := gin.Default()
 
 handlePost := func(c *gin.Context) {
@@ -190,7 +190,7 @@ The response is written using the Context.String function instead of the http.Re
 
 #### Handle POST Request using mux
 
-~~~Go 
+~~~
 router := mux.NewRouter()
 
 handlePost := func(w http.ResponseWriter, r *http.Request) {
@@ -256,7 +256,7 @@ To be continued...
 ### Mux
 Creating http router in a function with handlers then pass return value in server creation.
 
-~~~Go
+~~~
 func New() http.Handler {
 	mux := http.NewServeMux()
 	// Root
@@ -272,7 +272,7 @@ func New() http.Handler {
 
 In main function, where we run our server;
 
-~~~Go 
+~~~
 server := &http.Server{
 		Addr:    fmt.Sprintf(":8000"),
 		Handler: SomePackage.New(),
