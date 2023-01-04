@@ -1,7 +1,7 @@
 ---
 layout: default
 title: OAuth2 as an Authentication service
-nav_order: 10
+nav_order: 7
 ---
 
 # OAuth2 as an Authentication service
@@ -90,6 +90,18 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 } 
 ```
 
+---
+
+~~~Go
+// Scopes: OAuth 2.0 scopes provide a way to limit the amount of access that is granted to an access token.
+var googleOauthConfig = &oauth2.Config{
+	RedirectURL:  "http://localhost:8000/auth/google/callback",
+	ClientID:     "use-your-own",
+	ClientSecret: "use-your-own",
+	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
+	Endpoint:     google.Endpoint,
+}
+~~~
 ---
 
 After all the process finishes google redirect to `/auth/google/callback`
