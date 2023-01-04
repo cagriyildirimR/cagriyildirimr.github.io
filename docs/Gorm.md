@@ -20,12 +20,8 @@ nav_order: 5
 
 GORM is a code library that provides a simple and powerful interface for interacting with databases in the Go programming language.
 
-<!-- ~~~Go
-
-~~~ -->
-
 ### CRUD
-~~~Go
+~~~
 // User represents a user in the database
 type User struct {
 	gorm.Model

@@ -200,7 +200,6 @@ jobs:
             registry: docker.io
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
-        
 ```
 
 Sources: [All the events](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows)

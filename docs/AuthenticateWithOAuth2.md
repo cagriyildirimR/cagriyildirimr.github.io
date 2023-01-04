@@ -35,8 +35,7 @@ In browser, we handle a button/link with href that handles redirect function.
 <a href="/auth/google/login" style="text-transform:none">
 ```
 ---
-```Golang
-
+```
 mux.HandleFunc("/auth/google/login", oauthGoogleLogin)
 
 func oauthGoogleLogin(w http.ResponseWriter, r *http.Request) {
@@ -65,7 +64,7 @@ The purpose of the state cookie is to protect against cross-site request forgery
 
 ---
 
-```Golang
+```
 func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// Read oauthState from Cookie
 	oauthState, _ := r.Cookie("oauthstate")
@@ -92,7 +91,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 
 ---
 
-```Golang
+```
 // Scopes: OAuth 2.0 scopes provide a way to limit the amount of access that is granted to an access token.
 var googleOauthConfig = &oauth2.Config{
 	RedirectURL:  "http://localhost:8000/auth/google/callback",
@@ -106,7 +105,7 @@ var googleOauthConfig = &oauth2.Config{
 
 After all the process finishes google redirect to `/auth/google/callback`
 
-```Golang
+```
 mux.HandleFunc("/auth/google/callback", oauthGoogleCallback)
 
 func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {

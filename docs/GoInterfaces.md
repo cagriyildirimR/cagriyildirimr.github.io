@@ -22,7 +22,7 @@ In the Go programming language, an interface is a type that specifies a set of m
 
 Here is an example of an interface in Go:
 
-```Go
+```
 type Shape interface {
     Area() float64
     Perimeter() float64
@@ -31,7 +31,7 @@ type Shape interface {
 
 This `Shape` interface defines two methods: `Area` and `Perimeter`. Go interfaces are implemented implicitly. Any type that implements these two methods is said to implement the `Shape` interface. For example, you could define a `Rectangle` type that implements the `Shape` interface like this:
 
-```Go
+```
 type Rectangle struct {
     width, height float64
 }
@@ -53,7 +53,7 @@ By defining a **contract**, you can write code that expects a type to have certa
 
 For example, you might write a function that takes a `Shape` as an argument and calculates the total area of all the shapes in a list. You can use this function with any type that satisfies the `Shape` interface, such as a `Rectangle`, a `Circle`, or a `Triangle`, without needing to know exactly what type of shape you are working with. This makes your code more flexible and easier to maintain, as you can add new types that implement the Shape interface without needing to modify the code that uses them.
 
-```Go
+```
 func totalArea(shapes []Shape) float64 {
     var total float64
     for _, shape := range shapes {
@@ -65,7 +65,7 @@ func totalArea(shapes []Shape) float64 {
 
 ## Interface Satisfaction
 
-```Go
+```
 var w io.Writer
 w = os.Stdout         // OK: *os.File has Write method
 w = new(bytes.Buffer) // OK: *bytes.Buffer has Write method
@@ -81,7 +81,7 @@ rwc = w // compile error
 
 There is a subtle logic behind type having methods and pointer of said type having a method. 
 
-```Go
+```
 type IntSet struct {}
 
 func (*IntSet) String() string
@@ -91,7 +91,7 @@ var _ = IntSet{}.String() // compile error: String requires *IntSet receiver
 
 However we can call it on IntSet variable.
 
-```Go
+```
 var s IntSet
 var _ = s.String() // OK: s is a variable and &s has a String method
 // sytactic sugar same as (&s).String()
@@ -99,7 +99,7 @@ var _ = s.String() // OK: s is a variable and &s has a String method
 
 However only *IntSet satisfies `fmt.Stringer` interface.
 
-```Go
+```
 var _ fmt.Stringer = &s // OK
 var _ fmt.Stringer = s  // compile error. IntSet has no String method
 ```
@@ -108,7 +108,7 @@ In Go, we can define new abstractions or groupings of interest when we need them
 
 ### interface{} says nothing
 
-```Go
+```
 var any interface{}
 any = true
 any = 12.34
@@ -119,7 +119,7 @@ new(bytes.Buffer)
 
 ### Type assertion pattern
 
-```Go
+```
 var _ io.Writer = (*bytes.Buffer)(nil)
 ```
 This line of code is using the blank identifier `_` to discard the value of the assignment. It is declaring a variable of type `io.Writer` and initializing it with the value `(*bytes.Buffer)(nil)`. The `(*bytes.Buffer)(nil)` expression creates a pointer to a `bytes.Buffer` type with a value of nil.
@@ -130,7 +130,7 @@ This technique is often used in Go to check if a type satisfies an interface at 
 
 ### Anonymous interface casting
 
-```Go
+```
 func Unwrap(err error) error {
 	u, ok := err.(interface {
 		Unwrap() error
@@ -154,13 +154,13 @@ This function can be used to unwrap an error value that has been wrapped by anot
 
 Go variable are always initilized to a well-defined value.
 
-```Go
+```
 var w io.Writer
 ```
 
 `w` has type and value both set to `nil`.
 
-```Go
+```
 w = os.Stdout
 ```
 now type is set to `*os.File`.
