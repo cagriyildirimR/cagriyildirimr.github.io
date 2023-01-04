@@ -35,7 +35,7 @@ In browser, we handle a button/link with href that handles redirect function.
 <a href="/auth/google/login" style="text-transform:none">
 ```
 ---
-```Go
+```Golang
 
 mux.HandleFunc("/auth/google/login", oauthGoogleLogin)
 
@@ -65,7 +65,7 @@ The purpose of the state cookie is to protect against cross-site request forgery
 
 ---
 
-```Go
+```Golang
 func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// Read oauthState from Cookie
 	oauthState, _ := r.Cookie("oauthstate")
@@ -92,7 +92,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 
 ---
 
-~~~Go
+```Golang
 // Scopes: OAuth 2.0 scopes provide a way to limit the amount of access that is granted to an access token.
 var googleOauthConfig = &oauth2.Config{
 	RedirectURL:  "http://localhost:8000/auth/google/callback",
@@ -101,12 +101,12 @@ var googleOauthConfig = &oauth2.Config{
 	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
 	Endpoint:     google.Endpoint,
 }
-~~~
+```
 ---
 
 After all the process finishes google redirect to `/auth/google/callback`
 
-```Go
+```Golang
 mux.HandleFunc("/auth/google/callback", oauthGoogleCallback)
 
 func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
@@ -144,7 +144,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 3. Calls the Exchange method on the googleOauthConfig object, passing in the code query parameter from the request URL as a parameter. This exchanges the authorization code for an access token.
 4. Makes an HTTP GET request to the Google API with the access token as an authorization header.
 Reads the response from the API and stores it in the contents variable.
-5. Writes the contents of the API response to the response writer.
+1. Writes the contents of the API response to the response writer.
 
 Purpose of this function is to handle the redirect from the Google authorization server after the user has logged in and granted permission. 
 
