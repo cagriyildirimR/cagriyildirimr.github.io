@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Good Commit Messages - Technical Documentation</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/theme.js"></script>
+    <style>
+        .content { max-width: 800px; margin: 0 auto; padding: 20px; }
+        pre { background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 15px 0; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .example { border-left: 4px solid #4CAF50; padding-left: 1rem; margin: 1rem 0; }
+        .counter-example { border-left: 4px solid #f44336; padding-left: 1rem; margin: 1rem 0; }
+        
+        /* Dark mode overrides */
+        .dark pre { background-color: #1a1a1a; }
+        .dark .example { border-left-color: #6fcf97; }
+        .dark .counter-example { border-left-color: #eb5757; }
+    </style>
+</head>
+<body class="bg-white">
+    <header class="bg-white shadow-sm py-4 mb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Çağrı Yıldırım</h1>
+                <div class="flex items-center gap-4">
+                    <a href="/" class="text-blue-600 hover:text-blue-800">← Back to Home</a>
+                    <button id="theme-toggle" aria-label="Toggle dark mode" title="Switch to dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1 class="text-4xl font-bold mb-8">Writing Good Commit Messages</h1>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+            <p class="mb-4">Git commit messages are an important aspect of your version control workflow, as they allow you to communicate the changes you have made to your codebase and provide context for why those changes were necessary. Here are some key aspects of writing good Git commit messages:</p>
+            
+            <ul class="list-disc pl-6 mb-6">
+                <li class="mb-2">Keep the subject line short and concise: The subject line should be no longer than 50 characters, and should clearly and concisely summarize the changes made in the commit.</li>
+                <li class="mb-2">Use the imperative mood: The subject line should be written in the imperative mood, as if you are issuing a command.</li>
+                <li class="mb-2">Capitalize the subject line: Capitalize the first letter of the subject line to make it more readable.</li>
+                <li class="mb-2">Use the body to provide more context: The body should provide more context and detail about the changes.</li>
+                <li class="mb-2">Keep it concise: Try to keep the commit message concise while still providing enough information.</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Keep the subject line short and concise</h2>
+            
+            <div class="example">
+                <h3 class="font-bold text-green-700">Good Examples:</h3>
+                <ul class="list-disc pl-6">
+                    <li>"Fix login form bug"</li>
+                    <li>"Update README with installation instructions"</li>
+                </ul>
+            </div>
+
+            <div class="counter-example">
+                <h3 class="font-bold text-red-700">Bad Examples:</h3>
+                <ul class="list-disc pl-6">
+                    <li>"I fixed the really annoying bug in the login form that was causing problems for everyone..."</li>
+                    <li>"Updating the readme file with instructions on how to install the application..."</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Use the imperative mood</h2>
+            
+            <div class="example">
+                <h3 class="font-bold text-green-700">Good Examples:</h3>
+                <ul class="list-disc pl-6">
+                    <li>"Add tests for new feature"</li>
+                    <li>"Refactor database schema"</li>
+                    <li>"Fix typo in documentation"</li>
+                </ul>
+            </div>
+
+            <div class="counter-example">
+                <h3 class="font-bold text-red-700">Bad Examples:</h3>
+                <ul class="list-disc pl-6">
+                    <li>"Added tests for the new feature"</li>
+                    <li>"The database schema has been refactored"</li>
+                    <li>"A typo was fixed in the documentation"</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Summary Example</h2>
+            <pre><code>Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+ - Typically a hyphen or asterisk is used for the bullet
+
+If you use an issue tracker, put references to them at the bottom:
+
+Resolves: #123
+See also: #456, #789</code></pre>
+        </section>
+
+        <footer class="mt-8 pt-4 border-t border-gray-300">
+            <h2 class="text-xl font-bold mb-4">See also</h2>
+            <ul class="list-disc pl-6">
+                <li><a href="https://cbea.ms/git-commit/" class="text-blue-600 hover:underline">How to Write a Git Commit Message</a></li>
+                <li><a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html" class="text-blue-600 hover:underline">A Note About Git Commit Messages</a></li>
+            </ul>
+        </footer>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <a href="https://github.com/cagriyildirimr" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+                <i class="fab fa-github text-xl mr-2"></i>
+                GitHub Profile
+            </a>
+        </div>
+    </footer>
+</body>
+</html> 

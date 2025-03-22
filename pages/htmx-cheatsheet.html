@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Cheat Sheet - Çağrı Yıldırım</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/theme.js"></script>
+    <style>
+        .content { max-width: 900px; margin: 0 auto; padding: 20px; }
+        pre { background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 15px 0; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .htmx-example { border-left: 4px solid #8b5cf6; padding-left: 1rem; margin: 1rem 0; background-color: #f5f0ff; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #e5e7eb; padding: 8px 12px; text-align: left; }
+        th { background-color: #f3f4f6; }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        
+        /* Dark mode overrides for code examples */
+        .dark pre { background-color: #1a1a1a; }
+        .dark .htmx-example { background-color: #2d1f4d; border-left-color: #9f7aea; }
+        .dark th { background-color: #2d2d2d; }
+        .dark th, .dark td { border-color: #444; }
+        .dark tr:nth-child(even) { background-color: #2a2a2a; }
+    </style>
+</head>
+<body class="bg-white">
+    <header class="bg-white shadow-sm py-4 mb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Çağrı Yıldırım</h1>
+                <div class="flex items-center gap-4">
+                    <a href="/" class="text-blue-600 hover:text-blue-800">← Back to Home</a>
+                    <button id="theme-toggle" aria-label="Toggle dark mode" title="Switch to dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1 class="text-4xl font-bold mb-8 text-purple-800">HTMX Cheat Sheet</h1>
+        
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Introduction</h2>
+            <p class="mb-6">
+                HTMX is a library that allows you to access modern browser features directly from HTML, rather than using JavaScript. 
+                This cheat sheet covers the core attributes and patterns used in this website, helping you quickly reference the HTMX 
+                features as you explore the code.
+            </p>
+            <p class="mb-6">
+                HTMX version used in this site: <code class="bg-gray-100 px-2 py-1 rounded text-purple-700">1.9.10</code>
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Core HTMX Attributes</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hx-get</code></td>
+                        <td>Issues a GET request to the given URL</td>
+                        <td><code>&lt;button hx-get="/api/data"&gt;Get Data&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-post</code></td>
+                        <td>Issues a POST request to the given URL</td>
+                        <td><code>&lt;button hx-post="/api/submit"&gt;Submit&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-put</code></td>
+                        <td>Issues a PUT request to the given URL</td>
+                        <td><code>&lt;button hx-put="/api/update"&gt;Update&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-delete</code></td>
+                        <td>Issues a DELETE request to the given URL</td>
+                        <td><code>&lt;button hx-delete="/api/remove"&gt;Delete&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-patch</code></td>
+                        <td>Issues a PATCH request to the given URL</td>
+                        <td><code>&lt;button hx-patch="/api/partial-update"&gt;Update Partially&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-target</code></td>
+                        <td>Specifies the target element to swap content into</td>
+                        <td><code>&lt;button hx-get="/api/data" hx-target="#result"&gt;Load&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-swap</code></td>
+                        <td>Controls how the response is swapped into the DOM</td>
+                        <td><code>&lt;button hx-get="/api/data" hx-swap="outerHTML"&gt;Replace&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hx-trigger</code></td>
+                        <td>Specifies what triggers the request</td>
+                        <td><code>&lt;div hx-get="/api/data" hx-trigger="mouseenter"&gt;Hover Me&lt;/div&gt;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Common Patterns</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2 text-purple-700">Click to Load Content</h3>
+                <div class="htmx-example p-4 rounded">
+                    <pre><code class="language-html">&lt;button 
+  hx-get="/api/data" 
+  hx-target="#result" 
+  class="bg-blue-500 text-white px-4 py-2 rounded"
+&gt;
+  Load Data
+&lt;/button&gt;
+
+&lt;div id="result" class="mt-4"&gt;
+  Result will appear here...
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2 text-purple-700">Form Submission</h3>
+                <div class="htmx-example p-4 rounded">
+                    <pre><code class="language-html">&lt;form 
+  hx-post="/api/submit" 
+  hx-target="#form-result" 
+  hx-swap="outerHTML"
+&gt;
+  &lt;input type="text" name="name" placeholder="Your name" class="border p-2 rounded"&gt;
+  &lt;button type="submit" class="bg-green-500 text-white px-4 py-2 rounded"&gt;
+    Submit
+  &lt;/button&gt;
+&lt;/form&gt;
+
+&lt;div id="form-result"&gt;&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2 text-purple-700">Automatic Load on Page Load</h3>
+                <div class="htmx-example p-4 rounded">
+                    <pre><code class="language-html">&lt;div 
+  hx-get="/api/initial-data" 
+  hx-trigger="load"
+  hx-swap="innerHTML"
+  class="p-4 border rounded"
+&gt;
+  Loading...
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2 text-purple-700">Load Content After Delay</h3>
+                <div class="htmx-example p-4 rounded">
+                    <pre><code class="language-html">&lt;div 
+  hx-get="/api/delayed-data" 
+  hx-trigger="load delay:2s"
+  class="p-4 border rounded"
+&gt;
+  Content will load after 2 seconds...
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2 text-purple-700">Polling for Updates</h3>
+                <div class="htmx-example p-4 rounded">
+                    <pre><code class="language-html">&lt;div 
+  hx-get="/api/updates" 
+  hx-trigger="every 5s"
+  class="p-4 border rounded bg-gray-50"
+&gt;
+  This content will refresh every 5 seconds
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Swap Methods</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>innerHTML</code></td>
+                        <td>Default. Replaces the inner HTML of the target element</td>
+                    </tr>
+                    <tr>
+                        <td><code>outerHTML</code></td>
+                        <td>Replaces the entire target element with the response</td>
+                    </tr>
+                    <tr>
+                        <td><code>beforebegin</code></td>
+                        <td>Inserts the response before the target element</td>
+                    </tr>
+                    <tr>
+                        <td><code>afterbegin</code></td>
+                        <td>Inserts the response before the first child of the target element</td>
+                    </tr>
+                    <tr>
+                        <td><code>beforeend</code></td>
+                        <td>Inserts the response after the last child of the target element</td>
+                    </tr>
+                    <tr>
+                        <td><code>afterend</code></td>
+                        <td>Inserts the response after the target element</td>
+                    </tr>
+                    <tr>
+                        <td><code>none</code></td>
+                        <td>Does not append content from response (out of band items will still be processed)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Integrating HTMX with Tailwind</h2>
+            
+            <p class="mb-4">
+                This website uses both HTMX and Tailwind CSS. Here are some patterns for how they work together:
+            </p>
+
+            <div class="htmx-example p-4 rounded">
+                <pre><code class="language-html">&lt;!-- Button with loading state using Tailwind classes -->
+&lt;button 
+  hx-get="/api/data" 
+  hx-target="#result"
+  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+  hx-indicator="#spinner"
+&gt;
+  Load Data
+&lt;/button&gt;
+
+&lt;!-- Hidden spinner that appears during loading -->
+&lt;div id="spinner" class="htmx-indicator">
+  &lt;div class="animate-spin h-5 w-5 border-4 border-blue-500 rounded-full border-t-transparent"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Target element with Tailwind styling -->
+&lt;div id="result" class="mt-4 p-4 border rounded bg-white shadow-sm"&gt;
+  Result will appear here...
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <p class="mb-4 mt-8">
+                CSS for handling the loading indicator:
+            </p>
+
+            <div class="htmx-example p-4 rounded">
+                <pre><code class="language-css">/* Add this to your CSS */
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+.htmx-request .htmx-indicator {
+  opacity: 1;
+}
+.htmx-request.htmx-indicator {
+  opacity: 1;
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">HTMX Events</h2>
+            
+            <p class="mb-4">
+                HTMX provides a rich set of events that you can listen for:
+            </p>
+
+            <div class="htmx-example p-4 rounded">
+                <pre><code class="language-javascript">// Listen for successful responses
+document.body.addEventListener('htmx:afterOnLoad', function(event) {
+  console.log('Content loaded successfully!', event.detail.elt);
+});
+
+// Listen for errors
+document.body.addEventListener('htmx:responseError', function(event) {
+  console.error('Error loading content!', event.detail.xhr.status);
+});
+
+// Do something before a request is made
+document.body.addEventListener('htmx:beforeRequest', function(event) {
+  // You could show a global loading indicator here
+  console.log('Request is about to be made');
+});</code></pre>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Live Example on This Page</h2>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+                <h3 class="font-bold text-lg mb-2">Click the button to see HTMX in action:</h3>
+                
+                <div id="demo-area" class="border rounded p-4 mb-4 bg-gray-50">
+                    Click the button below to load content via HTMX
+                </div>
+                
+                <button 
+                    hx-get="/htmx-demo"
+                    hx-target="#demo-area"
+                    hx-trigger="click"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded"
+                >
+                    Load Content
+                </button>
+                
+                <p class="text-sm text-gray-500 mt-4">
+                    Note: This button triggers an HTMX request, but since this is a static site, 
+                    no actual server request is made. In a real application, this would fetch data from a server.
+                </p>
+            </div>
+            
+            <script>
+                // Mock the HTMX response for demonstration purposes
+                document.querySelector('button[hx-get="/htmx-demo"]').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setTimeout(function() {
+                        document.getElementById('demo-area').innerHTML = `
+                            <div class="bg-purple-100 p-4 rounded">
+                                <h4 class="text-purple-800 font-bold">Content Loaded!</h4>
+                                <p>This content was loaded using HTMX. In a real application, this would come from the server.</p>
+                                <p class="mt-2">Timestamp: ${new Date().toLocaleTimeString()}</p>
+                            </div>
+                        `;
+                    }, 500);
+                });
+            </script>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Resources</h2>
+            
+            <ul class="list-disc pl-6">
+                <li class="mb-2">
+                    <a href="https://htmx.org/docs/" class="text-purple-600 hover:underline" target="_blank">
+                        HTMX Official Documentation
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="https://htmx.org/examples/" class="text-purple-600 hover:underline" target="_blank">
+                        HTMX Examples
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="https://github.com/bigskysoftware/htmx" class="text-purple-600 hover:underline" target="_blank">
+                        HTMX GitHub Repository
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="https://tailwindcss.com/docs" class="text-purple-600 hover:underline" target="_blank">
+                        Tailwind CSS Documentation
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <a href="https://github.com/cagriyildirimr" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+                <i class="fab fa-github text-xl mr-2"></i>
+                GitHub Profile
+            </a>
+        </div>
+    </footer>
+</body>
+</html> 

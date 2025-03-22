@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Interfaces - Technical Documentation</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/theme.js"></script>
+    <style>
+        .content { max-width: 800px; margin: 0 auto; padding: 20px; }
+        pre { background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 15px 0; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        
+        /* Dark mode overrides for code examples */
+        .dark pre { background-color: #1a1a1a; }
+    </style>
+</head>
+<body class="bg-white">
+    <header class="bg-white shadow-sm py-4 mb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Çağrı Yıldırım</h1>
+                <div class="flex items-center gap-4">
+                    <a href="/" class="text-blue-600 hover:text-blue-800">← Back to Home</a>
+                    <button id="theme-toggle" aria-label="Toggle dark mode" title="Switch to dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1 class="text-4xl font-bold mb-8">Go Interfaces</h1>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+            <p class="mb-4">In the Go programming language, an interface is a type that specifies a set of methods that a type must implement. Interfaces allow you to define a contract for types that specify what methods they must have, without specifying how those methods should be implemented.</p>
+            
+            <pre><code class="language-go">type Shape interface {
+    Area() float64
+    Perimeter() float64
+}</code></pre>
+
+            <p class="mb-4">This <code>Shape</code> interface defines two methods: <code>Area</code> and <code>Perimeter</code>. Go interfaces are implemented implicitly. Any type that implements these two methods is said to implement the <code>Shape</code> interface. For example:</p>
+
+            <pre><code class="language-go">type Rectangle struct {
+    width, height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.width * r.height
+}
+
+func (r Rectangle) Perimeter() float64 {
+    return 2*r.width + 2*r.height
+}</code></pre>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Interface Satisfaction</h2>
+            <pre><code class="language-go">var w io.Writer
+w = os.Stdout         // OK: *os.File has Write method
+w = new(bytes.Buffer) // OK: *bytes.Buffer has Write method
+w = time.Second       // compile error: time.Duration lacks Write method
+
+var rwc io.ReadWriteCloser
+rwc = os.Stdout         // OK: has Read, Write and Close methods
+rwc = new(bytes.Buffer) // compile error: no Close method
+
+w = rwc // OK
+rwc = w // compile error</code></pre>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Interface Values</h2>
+            <p class="mb-4">Go variables are always initialized to a well-defined value.</p>
+            <pre><code class="language-go">var w io.Writer</code></pre>
+            <p class="mb-4"><code>w</code> has type and value both set to <code>nil</code>.</p>
+            <pre><code class="language-go">w = os.Stdout</code></pre>
+            <p class="mb-4">now type is set to <code>*os.File</code>.</p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">A Few Words of Advice</h2>
+            <p class="mb-4">Interfaces are only needed when there are two or more concrete types that must be dealt with in a uniform way. However, when an interface is satisfied by a single concrete type but the type cannot live in the same package as the interface because of its dependencies, an interface is a good way to decouple things.</p>
+        </section>
+
+        <footer class="mt-8 pt-4 border-t border-gray-300">
+            <p>Source: <a href="https://www.gopl.io/" class="text-blue-600 hover:underline">The Go Programming Language</a></p>
+        </footer>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <a href="https://github.com/cagriyildirimr" class="inline-flex items-center text-gray-600 hover:text-gray-900">
+                <i class="fab fa-github text-xl mr-2"></i>
+                GitHub Profile
+            </a>
+        </div>
+    </footer>
+</body>
+</html> 
